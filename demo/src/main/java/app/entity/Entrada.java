@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Entrada {
 	
+	// lista de inteirps
 	private List<Integer> lista;
 
 	
