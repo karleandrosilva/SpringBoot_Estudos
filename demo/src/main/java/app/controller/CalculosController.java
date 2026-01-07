@@ -21,16 +21,16 @@ public class CalculosController {
 	
 	// metódo (e endpoint que pode ser consumido externamente)
 	
-	@GetMapping("/somar") // verbo http (Mapeia requisições HTTP do tipo GET/BUSCAR)
-	public ResponseEntity<Resultado> somar(@RequestBody Entrada entrada) { // retornar status (tratar com try catch)
+	@GetMapping("/calcular") // verbo http (Mapeia requisições HTTP do tipo GET/BUSCAR)
+	public ResponseEntity<Resultado> calcular(@RequestBody Entrada entrada) { // retornar status (tratar com try catch)
 		
 		try {
-			Resultado resultado = this.calculosService.somar(entrada);
+			Resultado resultado = this.calculosService.calcular(entrada);
 			return new ResponseEntity<Resultado>(resultado, HttpStatus.OK); // retorna o resultado e o status da requisição
 			
 		} catch (Exception e) {
 			
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // retorna o status da requisição: erro causado por dados inválidos do cliente
 		}
 		
 	}

@@ -6,8 +6,6 @@ public class Entrada {
 	
 	// lista de inteirps
 	private List<Integer> lista;
-
-	
 	
 	public List<Integer> getLista() {
 		return lista;

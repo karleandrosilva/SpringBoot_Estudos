@@ -9,18 +9,20 @@ import app.entity.Resultado;
 public class CalculosService {
 	
 	// método de somar
-	public Resultado somar(Entrada entrada) {
+	public Resultado calcular(Entrada entrada) {
 		
-		Resultado resultado = new Resultado();
-		Integer soma = 0;
+		Resultado resultado = new Resultado(); // instancia 
+		Integer soma = 0;  
 		
-		if(entrada.getLista() != null) {
-			for (int i = 0 ; i < entrada.getLista().size(); i++) {
-				soma += entrada.getLista().get(i);
+		if(entrada.getLista() != null) { // se a lista não estiver vazia
+			for (int i = 0 ; i < entrada.getLista().size(); i++) { // percorre a lista
+				soma += entrada.getLista().get(i); // soma os números
 			}
 		}
 		
-		resultado.setSoma(soma);
+		resultado.setSoma(soma); // coloca o valor da soma em resultado (setei)
+		double media = soma/entrada.getLista().size();
+		resultado.setMedia(media);
 		return resultado;
 		
 	}
