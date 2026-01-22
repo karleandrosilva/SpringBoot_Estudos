@@ -35,7 +35,7 @@ public class CarroController {
 	}
 	
 	// método para buscar um carro pelo id
-	@GetMapping("/findById/{id}")
+	@GetMapping("/findById/{id}") // 
 	public ResponseEntity<Carro> findById(@PathVariable int id) {
 		
 		try {
@@ -48,4 +48,3 @@ public class CarroController {
 	}
 }
 
-// PAROU 20:43
