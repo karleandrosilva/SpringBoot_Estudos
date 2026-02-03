@@ -1,5 +1,7 @@
 package app.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +24,12 @@ public class CarroService {
 	}
 	
 	// método para buscar um carro pelo id
-	// simula a busca de um carro retornando um objeto fixo se o id for 1
-	public Carro findById(int id) {
+	public Carro findById(Long id) {
 		
-		if(id == 1) {
-			Carro carro = new Carro();
-			
-			carro.setModelo("SUV");
-			carro.setMarca("abc");
-			carro.setNome("nome");
-			carro.setAnoFabricacao(1998);
-			
-			return carro;
-		} else {
-			return null;
-		}
+		 // Utiliza Optional para evitar NullPointerException caso o usuário não seja encontrado.
+		Optional<Carro> carro = this.carroRepository.findById(id);
+		return carro.get();
+
 	}
 }
 
