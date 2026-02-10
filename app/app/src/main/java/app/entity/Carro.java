@@ -18,8 +18,12 @@ public class Carro {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	private String nome;
 	private int ano;
+	
+	public void setId(long id) {
+	    this.id = id;
+	}
 
 }
