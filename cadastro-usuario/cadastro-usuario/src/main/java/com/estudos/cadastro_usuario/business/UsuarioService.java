@@ -34,5 +34,22 @@ public class UsuarioService {
     }
 
     // método update
+    // jogada para que caso queira só atualizar um atributo/coluna usar o ternário
+    public void atualizarUsuarioPorId(Integer id, Usuario usuario) {
+        // buscar os dados do usuario x
+        Usuario usuarioEntity = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+
+        Usuario usuarioAtualizado = Usuario.builder() // verifica se o usuario passou no body o email
+                .id(usuarioEntity.getId())
+                .email(usuario.getEmail() != null ?
+                        usuario.getEmail() : usuarioEntity.getEmail())
+                .nome(usuario.getNome() != null ?
+                        usuario.getNome() : usuarioEntity.getNome())
+                // se tiver mais atributos, colocar TODOS
+                .build();
+
+        usuarioRepository.saveAndFlush(usuarioAtualizado);
+    }
+
 
 }
