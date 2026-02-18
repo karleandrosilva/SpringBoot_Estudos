@@ -27,7 +27,7 @@ public class Marca {
 	private String cnpj;
 	
 	// uma marca pode ter VARIOS carros
-	@OneToMany(mappedBy = "marca") // ligando 
+	@OneToMany(mappedBy = "marca") // mappedBy = ligando Marca com Carro
 	private List <Carro> carros;// varios carros = precisa de uma lista
 
 }
