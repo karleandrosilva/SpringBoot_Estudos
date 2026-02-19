@@ -15,5 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     // para deletar com email
     @Transactional // caso de algum erro, ele não execulta (não deleta)
-    void deletebyEmail(String email);
+    void deleteByEmail(String email);
 }

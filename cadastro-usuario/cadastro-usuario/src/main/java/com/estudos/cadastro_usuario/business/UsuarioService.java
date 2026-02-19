@@ -30,7 +30,7 @@ public class UsuarioService {
 
     // deletar usuario por email
     public void deletarUsuarioPorEmail(String email) {
-        usuarioRepository.deletebyEmail(email);
+        usuarioRepository.deleteByEmail(email);
     }
 
     // método update
@@ -50,6 +50,4 @@ public class UsuarioService {
 
         usuarioRepository.saveAndFlush(usuarioAtualizado);
     }
-
-
 }
