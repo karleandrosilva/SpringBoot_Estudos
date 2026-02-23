@@ -27,5 +27,4 @@ public class Agendamento {
     private String cliente;
     private String telefoneCliente;
     private LocalDateTime dataIsercao = LocalDateTime.now(); // para pegar a hora exata
-    // parou em: 14:40
 }
