@@ -6,26 +6,31 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service // para mostrar que é uma service
-@RequiredArgsConstructor // injeção de dependencia |
+@RequiredArgsConstructor // injeção de dependencia | (lombook cria construtor com os atributos final)
 public class AgendamentoService {
 
-    private final AgendamentoRepository agendamentoRepository; // chama injentando a dependencia
+    private final AgendamentoRepository agendamentoRepository; // chama injentando a dependencian  (a Service vai usar o Repository para acessar o BD)
 
     // salvar agendamento (verificar primeiro se a data e hora já está reservada)
     public Agendamento salvarAgendamento(Agendamento agendamento){
 
-        // só consiga agendar uma pessoa a cada hora | gap de 1h
-        // não permite que ninguem seja agendado em horarios conflitantes
-        LocalDateTime horaAgendamento = agendamento.getDataHoraAgendamento();
-        LocalDateTime horaFim = agendamento.getDataHoraAgendamento().plusHours(1); // verificar se dentro do gap de 1h nao tem ninguem agendado
+        // só consiga agendar uma pessoa a cada hora | gap de 1h | não permite que ninguem seja agendado em horarios conflitantes
+        LocalDateTime horaAgendamento = agendamento.getDataHoraAgendamento(); // pega a hora escolhida pelo cliente
+        LocalDateTime horaFim = agendamento.getDataHoraAgendamento().plusHours(1); // verifica se dentro do gap de 1h nao tem ninguém agendado (também define que cada agendamento dura 1h)
 
+        Agendamento agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween(
+                agendamento.getServico(), horaAgendamento,horaFim
+        ); // verifica se já existe alguém nesse horário
 
-        Agendamento agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween(agendamento.getServico(), horaAgendamento,horaFim);
-
-        //21:47
+        if (Objects.nonNull(agendados)){ // se o agendamentos já existe (nn posso preecher outro) | se não está nulo
+            throw new RuntimeException("Horário já está preechido");
+        }
+        return agendamentoRepository.save(agendamento); // se não... salva o agendamento
     }
 
-
+    // deletar agendamento
+    public void deletarAgendamento()
 }
