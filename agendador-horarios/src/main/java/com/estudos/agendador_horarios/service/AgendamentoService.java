@@ -14,7 +14,7 @@ public class AgendamentoService {
 
     private final AgendamentoRepository agendamentoRepository; // chama injentando a dependencian  (a Service vai usar o Repository para acessar o BD)
 
-    // salvar agendamento (verificar primeiro se a data e hora já está reservada)
+    // metodo de salvar agendamento (verifica primeiro se a data e hora já está reservada)
     public Agendamento salvarAgendamento(Agendamento agendamento){
 
         // só consiga agendar uma pessoa a cada hora | gap de 1h | não permite que ninguem seja agendado em horarios conflitantes
@@ -31,8 +31,8 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento); // se não... salva o agendamento
     }
 
-    // deletar agendamento
+    // metodo para deletar agendamento
     public void deletarAgendamento(LocalDateTime dataHoraAgendamento, String cliente){
-        agendamentoRepository.deleteByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente); // delete
+        agendamentoRepository.deleteByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente); // chama a repository | a remocao é feita por 2 criterios: data e hora do agendamento e o nome do cliente
     }
 }

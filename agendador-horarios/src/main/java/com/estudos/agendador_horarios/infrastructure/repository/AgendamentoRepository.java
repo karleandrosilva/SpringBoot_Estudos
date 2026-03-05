@@ -11,6 +11,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     // between = entre os horarios
     Agendamento findByServicoAndDataHoraAgendamentoBetween(String servico, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFinal);
 
-    @Transactional // quando trabalha com o delete usar
-    void deleteByDataHoraAgendamentoAndCliente(LocalDateTime dataHoraAgendamento, String cliente);
+    // usa o transactional para caso algo de erraado, a trasacao e cancelada e o bd não fica inconsistente
+    @Transactional // anotação para garantir que a operação de delete seja executada | dentro de uma transacao no banco de dados
+    void deleteByDataHoraAgendamentoAndCliente(LocalDateTime dataHoraAgendamento, String cliente); // cria a query baseado no nome do metodo | vai deletar agendamento que tenha: dataHoraAgendamento e Cliente
 }
