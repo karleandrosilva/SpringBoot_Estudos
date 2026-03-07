@@ -18,7 +18,6 @@ public class AgendamentoService {
 
     // metodo de salvar agendamento (verifica primeiro se a data e hora já está reservada)
     public Agendamento salvarAgendamento(Agendamento agendamento){
-
         // só consiga agendar uma pessoa a cada hora | gap de 1h | não permite que ninguem seja agendado em horarios conflitantes
         LocalDateTime horaAgendamento = agendamento.getDataHoraAgendamento(); // pega a hora escolhida pelo cliente
         LocalDateTime horaFim = agendamento.getDataHoraAgendamento().plusHours(1); // verifica se dentro do gap de 1h nao tem ninguém agendado (também define que cada agendamento dura 1h)
@@ -33,22 +32,32 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento); // se não... salva o agendamento
     }
 
-    // metodo para deletar agendamento
+    // metodo para deletar agendamento pela data e hora do cliente
     public void deletarAgendamento(LocalDateTime dataHoraAgendamento, String cliente){
         agendamentoRepository.deleteByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente); // chama a repository | a remocao é feita por 2 criterios: data e hora do agendamento e o nome do cliente
     }
 
-    // metodo de buscar agendamento do dia
+    // metodo de buscar agendamentos de um dia especifico
     public Agendamento buscarAgendamentosDia(LocalDate data){
-        LocalDateTime primeiraHoraDia = data.atStartOfDay(); // hora inicial
+        LocalDateTime primeiraHoraDia = data.atStartOfDay(); // início do dia (00:00)
         LocalDateTime horaFinalDia = data.atTime(23,59,59); // hora final do dia | fecha 23:59
 
-        return agendamentoRepository.findByDataHoraAgendamentoBetween(primeiraHoraDia, horaFinalDia); // agenda do dia daquele salão
+        return agendamentoRepository.findByDataHoraAgendamentoBetween(primeiraHoraDia, horaFinalDia); // busca no BD todos os agendamentos que estejam dentro desse intervalo
     }
 
-    // metodo de alterar por cliente
-    public Agendamento alterarAgendamento(Agendamento agendamento, String cliente, LocalDateTime dataHoraAgendada){
-// parou em 29
+    // metodo de alterar agendamento
+    public Agendamento alterarAgendamento(Agendamento agendamento, String cliente, LocalDateTime dataHoraAgendamento){ // pega o cliente e a data
+        Agendamento agenda = agendamentoRepository.findByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente); // busca no banco o agendamento usando a data/hora e o cliente
+
+        // se não existir agendamento com esses dados, lança erro
+        if (Objects.isNull(agenda)){ // se o agendamentos já existe (nn posso preecher outro) | se não está nulo
+            throw new RuntimeException("Horário não está preechido");
+        }
+
+        // mantém o mesmo ID do agendamento existente para que o JPA entenda que é uma atualização e não um novo registro
+        agendamento.setId(agenda.getId()); // substuindo o id com as infos novas
+        return agendamentoRepository.save(agendamento); // salva as novas informações no banco (update)
     }
 
+    // parou em 31:50
 }
