@@ -14,4 +14,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     // usa o transactional para caso algo de erraado, a trasacao e cancelada e o bd não fica inconsistente
     @Transactional // anotação para garantir que a operação de delete seja executada | dentro de uma transacao no banco de dados
     void deleteByDataHoraAgendamentoAndCliente(LocalDateTime dataHoraAgendamento, String cliente); // cria a query baseado no nome do metodo | vai deletar agendamento que tenha: dataHoraAgendamento e Cliente
+
+    // ver todo mundo que agendou no dia tal
+    Agendamento findByDataHoraAgendamentoBetween(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFim);
 }
