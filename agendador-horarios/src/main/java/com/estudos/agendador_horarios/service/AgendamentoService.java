@@ -38,10 +38,17 @@ public class AgendamentoService {
         agendamentoRepository.deleteByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente); // chama a repository | a remocao é feita por 2 criterios: data e hora do agendamento e o nome do cliente
     }
 
-    // metodo de buscar por datas
+    // metodo de buscar agendamento do dia
     public Agendamento buscarAgendamentosDia(LocalDate data){
         LocalDateTime primeiraHoraDia = data.atStartOfDay(); // hora inicial
-        LocalDateTime horaFinalDia = data.atTime(23,59,59); // hora final | fecha 23:59
+        LocalDateTime horaFinalDia = data.atTime(23,59,59); // hora final do dia | fecha 23:59
+
+        return agendamentoRepository.findByDataHoraAgendamentoBetween(primeiraHoraDia, horaFinalDia); // agenda do dia daquele salão
+    }
+
+    // metodo de alterar por cliente
+    public Agendamento alterarAgendamento(Agendamento agendamento, String cliente, LocalDateTime dataHoraAgendada){
+// parou em 29
     }
 
 }
