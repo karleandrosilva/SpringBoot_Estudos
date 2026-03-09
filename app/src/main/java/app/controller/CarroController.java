@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entity.Carro;
@@ -80,14 +81,16 @@ public class CarroController {
 		}
 	}
 	
-	@GetMapping("/findByNome") // consulta
-	public ResponseEntity<List<Carro>> findAll() {
+	@GetMapping("/findByNome") // consultar pelo nome (com filtro_
+	public ResponseEntity<List<Carro>> findByNome(@RequestParam String nome) {
 		try {
-			List<Carro> lista = this.carroService.findAll(); // recebe lista de carros
+			List<Carro> lista = this.carroService.findByNome(nome); // recebe lista de carros
 			return new ResponseEntity<>(lista, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	//19:22
 
 }
