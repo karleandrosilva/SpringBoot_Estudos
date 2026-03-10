@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.entity.Carro;
+import app.entity.Marca;
 import app.repository.CarroRepository;
 
 @Service
@@ -51,5 +52,12 @@ public class CarroService {
 	
 	public List<Carro> findByNome(String nome) {//o que for processado no repository vai retornar
 		return this.carroRepository.findByNome(nome);
+	}
+	
+	// metodo de procurar por marca
+	public List<Carro> findByMarca(long idMarca) { // receber o id da marca
+		Marca marca = new Marca(); // cria uma marca vazia
+		marca.setId(idMarca); // seto com base no id q vai receber da controller, pois o usuario  vai enviar o id da marca para filtrar para fazer virar um obj da classe marca para poder chamaro metodo do repository que espera uma Marca 
+		return this.carroRepository.findByMarca(marca);
 	}
 }

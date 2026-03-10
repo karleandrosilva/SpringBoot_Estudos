@@ -2,6 +2,8 @@ package app.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Carro {
 	// RELAÇÃO = Carro pode ter UMA marca e uma Marca pode ter VARIOS carros: (1:n)
 	
 	@ManyToOne(cascade = CascadeType.ALL) // salvar em cascata para que dê para salvar um carro contendo a marca
+	@JsonIgnoreProperties("carros")
 	private Marca marca; // obj da classe marca
 	
 	// Representando CARRO pode ter varios PROPRIETÁRIOS

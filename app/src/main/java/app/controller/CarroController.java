@@ -91,6 +91,15 @@ public class CarroController {
 		}
 	}
 	
-	//19:22
+	
+	@GetMapping("/findByMarca") // consultar pelo nome (com filtro_
+	public ResponseEntity<List<Carro>> findByMarca(@RequestParam long idMarca) {
+		try {
+			List<Carro> lista = this.carroService.findByMarca(idMarca); // recebe lista de marcas
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }
