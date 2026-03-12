@@ -3,10 +3,11 @@ package com.estudos.agendador_horarios.controller;
 import com.estudos.agendador_horarios.infrastructure.entity.Agendamento;
 import com.estudos.agendador_horarios.service.AgendamentoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController // avisa que é uma api rest (padrão rest)
 @RequiredArgsConstructor // para não criar os construtores na mão
@@ -16,7 +17,16 @@ public class AgendamentoController {
 
     @PostMapping // para salvar (cria e grava dados)
     public ResponseEntity<Agendamento> salvarAgendamento(@RequestBody Agendamento agendamento){ // retorna o save e trata excessões | @RequestBody = converte o JSON enviado na requisição
-        return ResponseEntity.accepted().body(agendamentoService.salvarAgendamento(agendamento)); // accepted = deu certo e caso não dê, ele responde com o erro
+        return ResponseEntity.status(HttpStatus.CREATED).body(agendamentoService.salvarAgendamento(agendamento)); // retorna status 201 indicando que o recurso foi criado
     }
+
+    @DeleteMapping // para deletar dado
+    public ResponseEntity<Void> deletarAgendamento(@RequestParam LocalDateTime dataHoraAgendamento, @RequestParam String cliente){
+
+        agendamentoService.deletarAgendamento(dataHoraAgendamento, cliente); // chama a camada da service, para a regra de negocio | tem que ser na ordem igual na service
+        return ResponseEntity.noContent().build(); //.noContent() = retorna status HTTP 404 (indicando que foi excluido) e nao tem nada para retornar na resposta
+    }
+
+    // 34:40
 
 }
