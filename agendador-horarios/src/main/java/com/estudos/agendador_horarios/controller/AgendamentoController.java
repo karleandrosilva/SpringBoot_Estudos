@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController // avisa que é uma api rest (padrão rest)
+@RequestMapping("/agendamentos") // uri
 @RequiredArgsConstructor // para não criar os construtores na mão
 public class AgendamentoController {
 
@@ -39,4 +40,4 @@ public class AgendamentoController {
     }
 }
 
-// 37:21
+// 44:00
