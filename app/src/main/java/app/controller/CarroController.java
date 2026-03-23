@@ -101,5 +101,15 @@ public class CarroController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("/findAcimaAno") // consultar pelo nome (com filtro_
+	public ResponseEntity<List<Carro>> findAcimaAno(@RequestParam int ano) {
+		try {
+			List<Carro> lista = this.carroService.findAcimaAno(ano); // recebe lista de carros
+			return new ResponseEntity<>(lista, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

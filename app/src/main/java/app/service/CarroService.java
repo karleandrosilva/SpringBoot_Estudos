@@ -57,7 +57,13 @@ public class CarroService {
 	// metodo de procurar por marca
 	public List<Carro> findByMarca(long idMarca) { // receber o id da marca
 		Marca marca = new Marca(); // cria uma marca vazia
-		marca.setId(idMarca); // seto com base no id q vai receber da controller, pois o usuario  vai enviar o id da marca para filtrar para fazer virar um obj da classe marca para poder chamaro metodo do repository que espera uma Marca 
+		marca.setId(idMarca); // seto com base no id q vai receber da controller, pois o usuario  vai enviar o id da marca para filtrar fazendo com que vire um obj da classe marca para poder chamar o metodo do repository que espera uma Marca 
 		return this.carroRepository.findByMarca(marca);
 	}
+	
+	// método de procurar anos
+	public List<Carro> findAcimaAno(int ano) {
+		return this.carroRepository.findAcimaAno(ano); // retorna lista de carros
+	}
+	
 }
