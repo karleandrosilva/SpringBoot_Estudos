@@ -17,10 +17,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter // todos os getters (Gera os métodos para pegar os valores)
+@Setter // todos os settes (Gera os métodos para alterar os valores)
+@AllArgsConstructor // todos os argumentos (Gera o construtor completo, aquele que recebe todos os campos da classe de uma vez)
+@NoArgsConstructor // todos os sem argumentos (Gera o construtor vazio/padrão. É obrigatório para o Hibernate conseguir criar os objetos do banco de dados)
 @Entity
 public class Carro {
 	
