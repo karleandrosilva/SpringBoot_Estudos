@@ -41,3 +41,5 @@ public class Carro {
 	@JoinTable(name = "carro_proprietario") // nome da tabela que une/join as duas
 	private List<Proprietario> proprietarios;
 }
+
+// testes automatizados
