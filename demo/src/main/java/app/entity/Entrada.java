@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Entrada {
 	
+	private long id;
+	
 	private List<Integer> lista;
 
 }
