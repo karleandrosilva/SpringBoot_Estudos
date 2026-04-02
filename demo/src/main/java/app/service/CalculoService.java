@@ -1,14 +1,13 @@
 package app.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //import app.dto.Entrada;
-import app.entity.Calculo;
 import app.entity.Entrada;
+import app.entity.Saida;
 import app.repository.CalculoRepository;
 
 @Service
@@ -31,21 +30,10 @@ public class CalculoService {
 	public List<Saida> findAll() {
 		return this.calculoRepository.findAll();
 	}
-
-
-	public int somar(List<Integer> lista) {
-		int soma = 0;
-		for (int i = 0; i < lista.size(); i++) {
-			if(lista.get(i) == null)
-				throw new RuntimeException("dslçfjakd");
-			else
-				soma += lista.get(i);
-		}
-		return soma;
-	}
 	
 	public int somar(List<Integer> lista) {
 		int soma = 0;
+		
 		for (int i = 0; i < lista.size(); i++) {
 			soma += lista.get(i);
 		}
@@ -62,5 +50,4 @@ public class CalculoService {
 		return maiorNumero;
 	}
 	
-
 }

@@ -2,6 +2,8 @@ package app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CalculoRepository extends JpaRepository<Saida, Long>
+import app.entity.Saida;
+
+public interface CalculoRepository extends JpaRepository<Saida, Long> {
 
 }
