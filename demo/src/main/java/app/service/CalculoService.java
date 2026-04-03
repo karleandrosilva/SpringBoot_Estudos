@@ -35,7 +35,9 @@ public class CalculoService {
 		int soma = 0;
 		
 		for (int i = 0; i < lista.size(); i++) {
-			soma += lista.get(i);
+			if (lista.get(i) != null) { // corigido depois do teste (ignora nulos)
+				soma += lista.get(i);
+			}
 		}
 		return soma;
 	}
