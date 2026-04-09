@@ -42,6 +42,15 @@ public class CalculoService {
 		return soma;
 	}
 	
+	public int somarNull(List<Integer> lista) {
+		int soma = 0;
+		
+		for (int i = 0; i < lista.size(); i++) {
+			soma += lista.get(i);
+		}
+		return soma;
+	}
+	
 	public int buscarMaiorNumero(List<Integer> lista) {
 		int maiorNumero = 0;
 		
