@@ -54,7 +54,7 @@ public class CalculoServiceTest {
 		
 		// Verifica se ao executar o método somar com valor inválido (null), uma exceção será lançada
 		assertThrows(Exception.class, () -> {
-			int retorno = this.calculoService.somarNull(lista); // Chama o método que deve gerar erro
+			int retorn = this.calculoService.somarNull(lista); // Chama o método que deve gerar erro
 		});
 	}
 }
