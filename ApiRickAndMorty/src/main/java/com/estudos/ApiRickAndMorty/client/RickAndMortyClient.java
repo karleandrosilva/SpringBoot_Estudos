@@ -17,20 +17,22 @@ public class RickAndMortyClient {
         webClient = builder.baseUrl("https://rickandmortyapi.com/api").build();
     }
 
-    // ser estática para não ser alterada
-    private final WebClient webClient;
+    // Declaração do cliente HTTP reativo
+    private final WebClient webClient; // 'final' garante que não será alterado após a inicialização
 
-    // client
+    // Método que busca um personagem pelo ID
+    // Retorna um Mono (resposta assíncrona que terá 0 ou 1 resultado)
     public  Mono<CharacterResponse> findAndCharacterById(int id) {
         log.info("buscando o personagem com o id [{}]", id);
-        return  (Mono<CharacterResponse>) webClient
-                .get()
-                .uri("/character/"+ id)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError,
-                        erro-> Mono.error(new RuntimeException("Verifique os parametros")))
-                .bodyToMono(CharacterResponse.class);
-    }
 
+        // início da requisição HTTP
+        return  (Mono<CharacterResponse>) webClient
+                .get() // define o método HTTP como GET
+                .uri("/character/"+ id) // monta o caminho final: base + /character/{id} | ex = rickandmortyapi.com/api/character/1
+                .accept(MediaType.APPLICATION_JSON) // define que a aplicação espera receber JSON como resposta
+                .retrieve() // inicia a execução da chamada
+                .onStatus(HttpStatusCode::is4xxClientError, // Trata erros do tipo 4xx (erro do cliente, ex: 404)
+                        erro-> Mono.error(new RuntimeException("Verifique os parametros")))
+                .bodyToMono(CharacterResponse.class);  // converte o corpo da resposta (JSON) para um objeto Java
+    }
 }
