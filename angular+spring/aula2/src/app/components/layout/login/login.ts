@@ -1,12 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [MdbFormsModule],
+  imports: [MdbFormsModule, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
+
+  usuario !: string; 
+  senha !: string;
+
+  // injetar o router para ter uma forma de chamar o metodo
+  router = inject(Router);
+
+  logar() {
+    if(this.usuario == 'admin' && this.senha == 'admin') {
+      // redicionar para carrolist
+      this.router.navigate(['admin/carros']);
+
+    } else {
+      alert('Usuário ou senha estão incorretos')
+    }
+  }
 
 }
