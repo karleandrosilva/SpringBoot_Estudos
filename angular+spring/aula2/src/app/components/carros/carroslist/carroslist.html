@@ -8,24 +8,46 @@
 
             <div class="card">
                 <div class="card-body">
+
+                    <div class="direita">
+
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="admin/carros/new">
+                            Novo
+                        </button>
+
+                    </div>
+
+                    <br>
+
                     <table border="1" class="table table-striped">
 
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
+                                <th class="direita" style="padding-right: 15%;">Ações</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
                             @for (carro of lista; track $index) {
-                                <tr>
+                            <tr>
                                 <td>{{carro.id}}</td>
                                 <td>{{carro.nome}}</td>
+                                <td class="direita">
+                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="admin/carros/edit{{carro.id}}">
+                                        Novo
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                                        (click)="deletar()">
+                                        Deletar
+                                    </button>
+                                </td>
                             </tr>
                             }
-                            
+
                         </tbody>
 
                     </table>
