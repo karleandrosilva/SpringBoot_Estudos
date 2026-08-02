@@ -9,9 +9,11 @@
             <div class="card">
                 <div class="card-body">
 
+                    <h3>Listagem de Carros</h3>
+
                     <div class="direita">
 
-                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="admin/carros/new">
+                        <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="/admin/carros/new">
                             Novo
                         </button>
 
@@ -36,11 +38,11 @@
                                 <td>{{carro.id}}</td>
                                 <td>{{carro.nome}}</td>
                                 <td class="direita">
-                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="admin/carros/edit{{carro.id}}">
+                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple routerLink="/admin/carros/edit/{{carro.id}}">
                                         Novo
                                     </button>
 
-                                    <button type="button" class="btn btn-primary btn-rounded" mdbRipple
+                                    <button type="button" class="btn btn-danger btn-rounded" mdbRipple
                                         (click)="deletar()">
                                         Deletar
                                     </button>
